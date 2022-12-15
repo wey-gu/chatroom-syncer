@@ -2,9 +2,6 @@ from wechaty import Wechaty, Message, FileBox
 from wechaty_puppet import MessageType
 
 
-from slack_sdk import WebClient
-from slack_sdk.errors import SlackApiError
-
 from .utils import format_msg_text, send_slack_message, prepare_for_configuration
 
 
@@ -31,7 +28,7 @@ class RoomSyncBot(Wechaty):
                         # TBD: get avatar from wechaty and cache it
                         await send_slack_message(
                             text=text,
-                            channel=group_to_channel[topic],
+                            channel=self.group_to_channel[topic],
                             username=username,
                             slack_token=self.slack_token)
 

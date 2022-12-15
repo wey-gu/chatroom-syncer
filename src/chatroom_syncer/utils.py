@@ -1,6 +1,11 @@
 # Utils
 import os, yaml
 
+
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
+
+
 def format_msg_text(text: str) -> str:
     """Format text to be sent"""
     text = text.replace("<br/>", "\n")

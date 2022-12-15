@@ -3,7 +3,7 @@ FROM python:3.10
 # Set the working directory to /app
 WORKDIR /app
 
-# Install chatroom-syncer using pip
+# Install chatroom-syncer
 RUN pip install chatroom-syncer
 
 # Set environment variables for WECHATY_PUPPET_SERVICE_ENDPOINT, WECHATY_PUPPET_SERVICE_TOKEN, and SLACK_BOT_TOKEN

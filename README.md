@@ -6,6 +6,11 @@ Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC 
 
 ## Run
 
+Before running, we need follow prerequisites:
+
+- Configure WeChat Group Names and Slack Channel Names in `config.yaml`, they should exist in both WeChat and Slack.
+- Configure Slack API Token in `.env`.
+
 ### Run with Docker
 
 Run it in background:
@@ -16,10 +21,28 @@ cp env-example .env
 docker-compose up -d
 ```
 
+Check both containers are Up:
+
+```bash
+docker-compose ps
+```
+
+In case there are any `Exit 0` containers, give another try of starting up:
+
+```bash
+docker-compose up -d
+```
+
 Scan the QR code with your WeChat App, and you are ready to go!
 
 ```bash
 docker logs wechat-room-syncer_chatroom-syncer_1 2>/dev/null | grep -v Wechaty
+```
+
+Stop it:
+
+```bash
+docker-compose down
 ```
 
 ### Run from host
@@ -92,4 +115,7 @@ docker logs wechat-room-syncer_chatroom-syncer_1 2>/dev/null | grep -v Wechaty
 
 # watch logs of the chatroom syncer
 docker logs wechat-room-syncer_chatroom-syncer_1 --follow
+
+# stop the chatroom syncer and remove the container
+docker-compose -f docker-compose.dev.yaml down
 ```
