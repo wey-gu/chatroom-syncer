@@ -2,7 +2,7 @@
 
 [project]
 name = "chatroom-syncer"
-version = "0.1.0"
+version = "0.1.1"
 description = "Sync your IM group chat to Slack."
 authors = [
     {name = "Wey Gu", email = "weyl.gu@gmail.com"},
@@ -17,7 +17,7 @@ requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
 
 [tool.pyprojectx]
-pdm = "pdm==2.3.2"
+pdm = "pdm==2.3.3"
 
 # commonly used tools
 #black = "black"
@@ -47,3 +47,15 @@ test = "pdm run pytest"
 # example os specific aliases
 #clean = "rmdir /s/q .venv .pytest_cache dist"
 #clean-all = "pw@ clean & rmdir /s/q .pyprojectx"
+
+[tool.pdm.build]
+excludes = ["./**/.git"]
+package-dir = "src"
+includes = ["src/chatroom_syncer"]
+source-includes = ["LICENSE", "README.md"]
+
+[project.urls]
+Homepage = "https://github.com/wey-gu/chatroom-syncer"
+Repository = "https://github.com/wey-gu/chatroom-syncer"
+# Documentation = "https://github.com/wey-gu/chatroom-syncer"
+# Changelog = "https://github.com/wey-gu/chatroom-syncer"

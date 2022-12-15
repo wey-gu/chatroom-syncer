@@ -1,24 +1,16 @@
 ---
-version: '3.8'
+version: '3.4'
 
 services:
-  chatroom-syncer:
-    image: weygu/chateroom-syncer:latest
-    environment:
-      - WECHATY_PUPPET_SERVICE_ENDPOINT=${WECHATY_PUPPET_SERVICE_ENDPOINT:wechaty-gateway:9009}
-      - WECHATY_PUPPET_SERVICE_TOKEN=${WECHATY_PUPPET_SERVICE_TOKEN}
-      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
-    working_dir: /app
-    command: ["python3", "-m", "chatroom-syncer"]
-    volumes:
-      - .:/app
-
   wechaty-gateway:
+    # build:
+    #   context: .
+    #   dockerfile: wechaty-gateway/Dockerfile
     image: weygu/wechaty-gateway:latest
     environment:
       - TIMEZONE=Asia/Shanghai
       - WECHATY_PUPPET_WECHAT_PUPPETEER_UOS=true
-      - WECHATY_PUPPET_SERVICE_TOKEN=${WECHATY_PUPPET_SERVICE_TOKEN}
+      - WECHATY_PUPPET_SERVICE_TOKEN=${WECHATY_PUPPET_SERVICE_TOKEN:-foobar2000}
       - WECHATY_PUPPET=wechaty-puppet-wechat
       - WECHATY_VERSION=1.20.2
       - WECHATY_PUPPET_VERSION=1.18.4
@@ -28,6 +20,27 @@ services:
       - PUID=0
       - GUID=0
     working_dir: /wechaty_data
-    command: ["wechaty", "gateway", "--token", "$WECHATY_PUPPET_SERVICE_TOKEN", "--port", "$WECHATY_PUPPET_SERVER_PORT", "--puppet", "$WECHATY_PUPPET"]
     ports:
       - "9009:9009"
+    # healthcheck:
+    #   test: ["CMD-SHELL", "6<>/dev/tcp/127.0.0.1/9009"]
+    #   interval: 10s
+    #   timeout: 10s
+    #   retries: 5
+    #   start_period: 20s
+  chatroom-syncer:
+    image: weygu/chateroom-syncer:latest
+    environment:
+      - WECHATY_PUPPET_SERVICE_ENDPOINT=${WECHATY_PUPPET_SERVICE_ENDPOINT:-wechaty-gateway:9009}
+      - WECHATY_PUPPET_SERVICE_TOKEN=${WECHATY_PUPPET_SERVICE_TOKEN:-foobar2000}
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+    working_dir: /app
+    command: ["python3", "-m", "chatroom_syncer"]
+    # command: ["sleep", "1000000"]
+    volumes:
+      - ${PWD}:/app
+    # wait for the wechaty-gateway service to be ready
+    # https://docs.docker.com/compose/startup-order/
+    restart: on-failure
+    depends_on:
+      - wechaty-gateway

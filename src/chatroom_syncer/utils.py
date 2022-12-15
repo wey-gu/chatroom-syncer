@@ -13,7 +13,7 @@ def prepare_for_wechaty() -> None:
     if not os.environ.get("WECHATY_PUPPET_SERVICE_ENDPOINT"):
         os.environ["WECHATY_PUPPET_SERVICE_ENDPOINT"] = "127.0.0.1:9009"
     if not os.environ.get("WECHATY_PUPPET_SERVICE_TOKEN"):
-        os.environ["WECHATY_PUPPET_SERVICE_TOKEN"] ="test"
+        os.environ["WECHATY_PUPPET_SERVICE_TOKEN"] ="foobar2000"
     os.environ["WECHATY_PUPPET_WECHAT_PUPPETEER_UOS"] = "true"
 
 
