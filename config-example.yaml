@@ -2,3 +2,4 @@
 group_channel_mapping:
   "NebulaGraph 讨论群 · Venus": "#wechat-sync-Venus"
   "NebulaGraph 讨论群 · Earth": "#wechat-sync-Earth"
+enable_avatar: true

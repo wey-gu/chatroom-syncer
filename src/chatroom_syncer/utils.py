@@ -1,9 +1,10 @@
 # Utils
-import os, yaml
-
+import os, yaml, random
 
 from slack_sdk.errors import SlackApiError
 from slack_sdk.web.async_client import AsyncWebClient
+
+from .emoji import emoji_list
 
 
 def format_msg_text(text: str) -> str:
@@ -54,15 +55,22 @@ def validate_config(config: dict) -> bool:
     return True
 
 
+def get_emoji() -> str:
+    """Get emoji"""
+    return random.choice(emoji_list)
+
+
 async def send_slack_message(
-        text: str, channel: str, username: str, slack_token: str) -> None:
+        text: str, channel: str, username: str, slack_token: str,
+        icon_emoji: [str, None] = None) -> None:
     """Send message to Slack"""
     client = AsyncWebClient(token=slack_token)
     try:
         response = await client.chat_postMessage(
             channel=channel,
             text=text,
-            username=username
+            username=username,
+            icon_emoji=icon_emoji
         )
         print(response)
     except SlackApiError as e:

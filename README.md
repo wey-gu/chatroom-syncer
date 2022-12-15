@@ -116,6 +116,7 @@ And fill in the following fields in the table:
 | Field | Description |
 | ----  | ----------- |
 | `group_channel_mapping` | A mapping from WeChat group name to Slack channel name |
+| `enable_avatar`         | Whether to enable generate random emoji based avatar   |
 
 
 ## Contribute
