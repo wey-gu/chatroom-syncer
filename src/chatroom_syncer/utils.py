@@ -2,8 +2,8 @@
 import os, yaml
 
 
-from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+from slack_sdk.web.async_client import AsyncWebClient
 
 
 def format_msg_text(text: str) -> str:
@@ -57,9 +57,9 @@ def validate_config(config: dict) -> bool:
 async def send_slack_message(
         text: str, channel: str, username: str, slack_token: str) -> None:
     """Send message to Slack"""
-    client = WebClient(token=slack_token)
+    client = AsyncWebClient(token=slack_token)
     try:
-        response = client.chat_postMessage(
+        response = await client.chat_postMessage(
             channel=channel,
             text=text,
             username=username
