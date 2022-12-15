@@ -4,6 +4,10 @@
 
 Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC in the old days, so that the information, context and history of communication could be discoverred, learnt from and referenced by others, anyware, anytime.
 
+
+https://user-images.githubusercontent.com/1651790/207810877-b86943fa-24b3-479c-ac25-d602a6c5d53c.mp4
+
+
 ## Run
 
 Before running, we need follow prerequisites:
