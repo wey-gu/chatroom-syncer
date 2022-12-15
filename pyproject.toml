@@ -1,0 +1,49 @@
+[tool.pdm]
+
+[project]
+name = "chatroom-syncer"
+version = "0.1.0"
+description = "Sync your IM group chat to Slack."
+authors = [
+    {name = "Wey Gu", email = "weyl.gu@gmail.com"},
+]
+dependencies = ["quart==0.18.0", "wechaty==0.8.66", "slack-sdk==3.19.5", "pyyaml==6.0"]
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "apache-2.0"}
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"
+
+[tool.pyprojectx]
+pdm = "pdm==2.3.2"
+
+# commonly used tools
+#black = "black"
+#isort = "isort"
+#pylint = "pylint"
+#pre-commit = "pre-commit"
+#jupyter = ["jupyter", "."]
+
+[tool.pyprojectx.aliases]
+install = "pdm install"
+run = "pdm run"
+outdated = "pdm update --outdated"
+test = "pdm run pytest"
+
+# example aliases
+#clean = "rm -rf .venv .pytest_cache dist"
+#clean-all = "pw@ clean && rm -rf .pyprojectx"
+#black = "black src tests"
+#isort = "isort src tests"
+#check-pylint = "pylint src tests"
+#check-black = "black src tests --check"
+#check = "pw@ check-black && pw@ check-pylint && pw@ test"
+#build = "pw@ install && pw@ check && pw@ pdm build"
+#notebook = "jupyter notebook -y"
+
+[tool.pyprojectx.os.win.aliases]
+# example os specific aliases
+#clean = "rmdir /s/q .venv .pytest_cache dist"
+#clean-all = "pw@ clean & rmdir /s/q .pyprojectx"
