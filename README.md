@@ -7,6 +7,34 @@ Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC 
 
 https://user-images.githubusercontent.com/1651790/207810877-b86943fa-24b3-479c-ac25-d602a6c5d53c.mp4
 
+## Components and Flow
+
+There are two processes in the system:
+- Chatroom Syncer, current code base in Python as the WeChaty Client and the bot
+- WeChaty Gateway, which leverages the Wechaty with UOS Wechat Client(also named as a puppet) to be called by the Chatroom Syncer due to WebChaty is not a native Python library, and the Wechaty Gateway is a gRPC server to manipulate and watch WeChat the puppet.
+
+Thus, we need to start the WeChaty Gateway before the Chatroom Syncer.
+
+```asciiarm
+┌────────────────────────────┐          ┌────────┐
+│                            │          │        │
+│ Chatroom Syncer            │          │        │
+│                            │          │        │
+│ WebChaty.onMessage()       ├──────────▶ Slack  │
+│                            │          │        │
+└──────────────▲─────────────┘          │        │
+               │                        └────────┘
+             gRPC
+               │
+┌──────────────▼──────────────┐
+│                             │
+│  Wechaty Gateway            │
+│                             │
+│┌────────────────────────┐   │
+││ Wechaty UOS puppet     │   │
+│└────────────────────────┘   │
+└─────────────────────────────┘
+```
 
 ## Run
 
