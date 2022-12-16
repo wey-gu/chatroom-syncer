@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import math
 import os
+import re
 from typing import TypedDict
 
 import yaml
@@ -25,7 +26,14 @@ class Config(TypedDict):
 
 def format_msg_text(text: str) -> str:
     """Format text to be sent"""
+    # render newline correctly
     text = text.replace("<br/>", "\n")
+    # remove URL trackers
+    patter = re.compile(r'<a\s+[^>]*>(.*?)</a>')
+    text = patter.sub(r'\1', text)
+    # remove emoji in picture <img> tag
+    patter = re.compile(r'<img[^>]*>')
+    text = patter.sub(r'', text)
     return text
 
 
