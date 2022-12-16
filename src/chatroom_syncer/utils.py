@@ -64,7 +64,7 @@ def prepare_for_configuration() -> Config:
     return config
 
 
-def validate_config(config: Config) -> bool:
+def validate_config(config: Config) -> None:
     """Validate config file"""
     if not config.get("group_channel_mapping"):
         raise ValueError("No group_channel_mapping found in config file")
