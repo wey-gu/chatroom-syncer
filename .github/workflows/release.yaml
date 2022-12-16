@@ -39,6 +39,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push Docker images
         uses: docker/build-push-action@v3
+        env:
+          # tag name, removed prefix "v"
+          VERSION: ${{ github.event.release.tag_name }}
         with:
           platforms: linux/amd64
           tags: weygu/chatroom-syncer:latest, weygu/chatroom-syncer:$VERSION
