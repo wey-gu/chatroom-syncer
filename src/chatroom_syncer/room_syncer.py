@@ -1,17 +1,19 @@
-from wechaty import Wechaty, Message, FileBox
+from wechaty import Message, Wechaty
 from wechaty_puppet import MessageType
 
 from .utils import (
     format_msg_text,
-    send_slack_message,
+    get_emoji,
     prepare_for_configuration,
-    get_emoji)
+    send_slack_message,
+)
 
 
 class RoomSyncBot(Wechaty):
     """
     Listen for events via on_message() from the room and send to Slack
     """
+
     def __init__(self):
         self._config = prepare_for_configuration()
         super().__init__()
@@ -43,11 +45,12 @@ class RoomSyncBot(Wechaty):
                             channel=self.group_to_channel[topic],
                             username=username,
                             slack_token=self.slack_token,
-                            icon_emoji=avatar_emoji)
+                            icon_emoji=avatar_emoji,
+                        )
 
                 if msg.type() == MessageType.MESSAGE_TYPE_IMAGE:
                     # TBD: send image to slack
-                    print('Image File Recieved, ignored now')
+                    print("Image File Recieved, ignored now")
 
 
 async def main():
@@ -56,4 +59,4 @@ async def main():
     """
     bot = RoomSyncBot()
     await bot.start()
-    print('[RoomSyncBot] started.')
+    print("[RoomSyncBot] started.")
