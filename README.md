@@ -6,8 +6,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/wey-gu/chatroom-syncer.svg)](https://github.com/wey-gu/chatroom-syncer/stargazers)
 [![Code size](https://img.shields.io/github/languages/code-size/wey-gu/chatroom-syncer.svg)](https://github.com/wey-gu/chatroom-syncer)
 [![Actions Status](https://github.com/wey-gu/chatroom-syncer/workflows/Continuous%20Integration/badge.svg)](https://github.com/wey-gu/chatroom-syncer/actions)
-[![Docker Image docker:wechaty-gateway](https://img.shields.io/docker/v/weygu/wechaty-gateway?label=Latest%20Tag)](https://hub.docker.com/r/weygu/wechaty-gateway)
-[![Docker Image docker:chatroom-syncer](https://img.shields.io/docker/v/weygu/chatroom-syncer?label=Latest%20Tag)](https://hub.docker.com/r/weygu/chatroom-syncer)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
@@ -20,6 +18,12 @@ Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC 
 </video>
 
 ## Components and Flow
+
+| Component | Docker Images |
+| ----  | ----------- |
+| `wechaty-gateway` | [![Docker Image docker:wechaty-gateway](https://img.shields.io/docker/v/weygu/wechaty-gateway?label=Latest%20Tag)](https://hub.docker.com/r/weygu/wechaty-gateway) |
+| `chatroom-syncer` | [![Docker Image docker:chatroom-syncer](https://img.shields.io/docker/v/weygu/chatroom-syncer?label=Latest%20Tag)](https://hub.docker.com/r/weygu/chatroom-syncer) |
+
 
 There are two processes in the system:
 - Chatroom Syncer, current code base in Python as the WeChaty Client and the bot
