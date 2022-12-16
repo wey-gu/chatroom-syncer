@@ -1,6 +1,10 @@
 # Utils
-import os, yaml, random
+from __future__ import annotations
 
+import os
+import random
+
+import yaml
 from slack_sdk.errors import SlackApiError
 from slack_sdk.web.async_client import AsyncWebClient
 
@@ -19,7 +23,7 @@ def prepare_for_wechaty() -> None:
     if not os.environ.get("WECHATY_PUPPET_SERVICE_ENDPOINT"):
         os.environ["WECHATY_PUPPET_SERVICE_ENDPOINT"] = "127.0.0.1:9009"
     if not os.environ.get("WECHATY_PUPPET_SERVICE_TOKEN"):
-        os.environ["WECHATY_PUPPET_SERVICE_TOKEN"] ="foobar2000"
+        os.environ["WECHATY_PUPPET_SERVICE_TOKEN"] = "foobar2000"
     os.environ["WECHATY_PUPPET_WECHAT_PUPPETEER_UOS"] = "true"
 
 
@@ -61,8 +65,12 @@ def get_emoji() -> str:
 
 
 async def send_slack_message(
-        text: str, channel: str, username: str, slack_token: str,
-        icon_emoji: [str, None] = None) -> None:
+    text: str,
+    channel: str,
+    username: str,
+    slack_token: str,
+    icon_emoji: str | None = None,
+) -> None:
     """Send message to Slack"""
     client = AsyncWebClient(token=slack_token)
     try:
@@ -70,7 +78,7 @@ async def send_slack_message(
             channel=channel,
             text=text,
             username=username,
-            icon_emoji=icon_emoji
+            icon_emoji=icon_emoji,
         )
         print(response)
     except SlackApiError as e:

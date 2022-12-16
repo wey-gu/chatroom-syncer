@@ -18,6 +18,12 @@ requires-python = ">=3.8"
 readme = "README.md"
 license = {text = "apache-2.0"}
 
+[project.urls]
+Homepage = "https://github.com/wey-gu/chatroom-syncer"
+Repository = "https://github.com/wey-gu/chatroom-syncer"
+# Documentation = "https://github.com/wey-gu/chatroom-syncer"
+# Changelog = "https://github.com/wey-gu/chatroom-syncer"
+
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
@@ -60,8 +66,8 @@ package-dir = "src"
 includes = ["src/chatroom_syncer"]
 source-includes = ["LICENSE", "README.md"]
 
-[project.urls]
-Homepage = "https://github.com/wey-gu/chatroom-syncer"
-Repository = "https://github.com/wey-gu/chatroom-syncer"
-# Documentation = "https://github.com/wey-gu/chatroom-syncer"
-# Changelog = "https://github.com/wey-gu/chatroom-syncer"
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 79
