@@ -29,11 +29,11 @@ def format_msg_text(text: str) -> str:
     # render newline correctly
     text = text.replace("<br/>", "\n")
     # remove URL trackers
-    patter = re.compile(r'<a\s+[^>]*>(.*?)</a>')
-    text = patter.sub(r'\1', text)
+    patter = re.compile(r"<a\s+[^>]*>(.*?)</a>")
+    text = patter.sub(r"\1", text)
     # remove emoji in picture <img> tag
-    patter = re.compile(r'<img[^>]*>')
-    text = patter.sub(r'', text)
+    patter = re.compile(r"<img[^>]*>")
+    text = patter.sub(r"", text)
     return text
 
 
