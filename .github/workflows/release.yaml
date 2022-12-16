@@ -27,11 +27,6 @@ jobs:
             pdm install --no-dev --force --no-cache --no-input --no-self chatroom-syncer==$VERSION && break
             sleep $((2 ** i))
           done
-      - name: Build Docker image
-        run: |
-          docker build -t chatroom-syncer .
-          docker tag chatroom-syncer username/chatroom-syncer:$VERSION
-          docker tag chatroom-syncer username/chatroom-syncer:latest
       - name: Log into DockerHub
         uses: docker/login-action@v2
         with:
