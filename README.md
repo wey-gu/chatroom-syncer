@@ -8,6 +8,7 @@
 [![Actions Status](https://github.com/wey-gu/chatroom-syncer/workflows/Continuous%20Integration/badge.svg)](https://github.com/wey-gu/chatroom-syncer/actions)
 [![Docker Image docker:wechaty-gateway](https://img.shields.io/docker/v/weygu/wechaty-gateway?label=Latest%20Tag)](https://hub.docker.com/r/weygu/wechaty-gateway)
 [![Docker Image docker:chatroom-syncer](https://img.shields.io/docker/v/weygu/chatroom-syncer?label=Latest%20Tag)](https://hub.docker.com/r/weygu/chatroom-syncer)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
 Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC in the old days, so that the information, context and history of communication could be discoverred, learnt from and referenced by others, anyware, anytime.
