@@ -168,3 +168,13 @@ docker logs chatroom-syncer_chatroom-syncer_1 --follow
 # stop the chatroom syncer and remove the container
 docker-compose -f docker-compose.dev.yaml down
 ```
+
+### linting
+
+```bash
+# install pre-commit
+pip install pre-commit
+
+# run pre-commit
+pre-commit run --all-files
+```
