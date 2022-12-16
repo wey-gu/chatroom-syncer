@@ -19,7 +19,6 @@ class RoomSyncBot(Wechaty):
         super().__init__()
         self.slack_token = self._config["slack_token"]
         self.group_to_channel = self._config["group_channel_mapping"]
-        self.avatar_cache = {}
 
     async def on_message(self, msg: Message) -> None:
         room = msg.room()
@@ -33,11 +32,7 @@ class RoomSyncBot(Wechaty):
                         contact = msg.talker()
                         username = contact.name
                         if self._config["enable_avatar"]:
-                            if username not in self.avatar_cache:
-                                avatar_emoji = get_emoji()
-                                self.avatar_cache[username] = avatar_emoji
-                            else:
-                                avatar_emoji = self.avatar_cache[username]
+                            avatar_emoji = get_emoji(username)
                         else:
                             avatar_emoji = None
                         await send_slack_message(
