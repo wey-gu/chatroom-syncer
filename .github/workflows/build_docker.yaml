@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build Docker image
-        run: |
-          docker build -f Dockerfile.dev -t chatroom-syncer .
-          docker tag chatroom-syncer weygu/chatroom-syncer:latest
       - name: Log into DockerHub
         uses: docker/login-action@v2
         with:
@@ -25,3 +21,4 @@ jobs:
           platforms: linux/amd64
           tags: weygu/chatroom-syncer:latest
           push: true
+          file: Dockerfile.dev
