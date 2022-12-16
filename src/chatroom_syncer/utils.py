@@ -1,14 +1,26 @@
 # Utils
 from __future__ import annotations
 
+import hashlib
+import math
 import os
-import random
+from typing import TypedDict
 
 import yaml
 from slack_sdk.errors import SlackApiError
 from slack_sdk.web.async_client import AsyncWebClient
 
 from .emoji import emoji_list
+
+HASH_BYTES = math.ceil(math.log(len(emoji_list), 2) / 8)
+
+
+class Config(TypedDict):
+    """Config"""
+
+    group_channel_mapping: dict[str, str]
+    slack_token: str
+    enable_avatar: bool
 
 
 def format_msg_text(text: str) -> str:
@@ -31,12 +43,13 @@ def prepare_for_slack() -> str:
     """Prepare for slack"""
     slack_token = os.environ.get("SLACK_BOT_TOKEN")
     if not slack_token:
-        print("No slack token found in environment variable: SLACK_BOT_TOKEN")
-        exit(1)
+        raise RuntimeError(
+            "No slack token found in environment variable: SLACK_BOT_TOKEN"
+        )
     return slack_token
 
 
-def prepare_for_configuration() -> dict:
+def prepare_for_configuration() -> Config:
     """Prepare for room syncer"""
     prepare_for_wechaty()
     slack_token = prepare_for_slack()
@@ -46,22 +59,24 @@ def prepare_for_configuration() -> dict:
     with open(config_file, "r") as f:
         config = yaml.safe_load(f)
 
-    assert validate_config(config)
+    validate_config(config)
     config["slack_token"] = slack_token
     return config
 
 
-def validate_config(config: dict) -> bool:
+def validate_config(config: Config) -> bool:
     """Validate config file"""
     if not config.get("group_channel_mapping"):
-        print("No group_channel_mapping found in config file")
-        return False
-    return True
+        raise ValueError("No group_channel_mapping found in config file")
 
 
-def get_emoji() -> str:
+def get_emoji(username: str) -> str:
     """Get emoji"""
-    return random.choice(emoji_list)
+    username_hash = hashlib.sha256(username.encode("utf-8")).digest()
+    # Get the first 2 bytes of the sha256 digest, that is max 65535
+    # then get the index by mod the length of emoji list
+    emoji_index = int.from_bytes(username_hash[:HASH_BYTES], "big")
+    return emoji_list[emoji_index % len(emoji_list)]
 
 
 async def send_slack_message(
