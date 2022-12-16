@@ -1,0 +1,43 @@
+name: Release workflow
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Publish to PyPI
+        env:
+          PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          pip install pdm
+          pdm build
+          pdm publish --username $PYPI_USERNAME --password $PYPI_PASSWORD
+      - name: Ensure it could be installed from PyPI
+        env:
+          # tag name, removed prefix "v"
+          VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          # exponential backoff to ensure the version is available on PyPI
+          for i in {1..8}; do
+            pdm install --no-dev --force --no-cache --no-input --no-self chatroom-syncer==$VERSION && break
+            sleep $((2 ** i))
+          done
+      - name: Build Docker image
+        run: |
+          docker build -t chatroom-syncer .
+          docker tag chatroom-syncer username/chatroom-syncer:$VERSION
+          docker tag chatroom-syncer username/chatroom-syncer:latest
+      - name: Push Docker image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          docker push username/chatroom-syncer:$VERSION
+          docker push username/chatroom-syncer:latest
