@@ -84,7 +84,7 @@ docker-compose up -d
 Scan the QR code with your WeChat App, and you are ready to go!
 
 ```bash
-docker logs wechat-room-syncer_chatroom-syncer_1 2>/dev/null | grep -v Wechaty
+docker logs chatroom-syncer_chatroom-syncer_1 2>/dev/null | grep -v Wechaty
 ```
 
 Stop it:
@@ -160,10 +160,10 @@ docker-compose -f docker-compose.dev.yaml build
 docker-compose -f docker-compose.dev.yaml up -d
 
 # get QR code to scan
-docker logs wechat-room-syncer_chatroom-syncer_1 2>/dev/null | grep -v Wechaty
+docker logs chatroom-syncer_chatroom-syncer_1 2>/dev/null | grep -v Wechaty
 
 # watch logs of the chatroom syncer
-docker logs wechat-room-syncer_chatroom-syncer_1 --follow
+docker logs chatroom-syncer_chatroom-syncer_1 --follow
 
 # stop the chatroom syncer and remove the container
 docker-compose -f docker-compose.dev.yaml down
