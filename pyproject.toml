@@ -69,7 +69,7 @@ env_file = ".env"
 [tool.pdm.build]
 excludes = ["./**/.git"]
 package-dir = "src"
-includes = ["src/chatroom_syncer"]
+includes = ["src/chatroom_syncer", "src/*.pth"]
 source-includes = ["LICENSE", "README.md"]
 
 [tool.isort]

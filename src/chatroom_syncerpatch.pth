@@ -1,0 +1,1 @@
+import chatroom_syncer._patch; chatroom_syncer._patch.patch_all()
