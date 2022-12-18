@@ -62,6 +62,10 @@ test = "pdm run pytest"
 #clean = "rmdir /s/q .venv .pytest_cache dist"
 #clean-all = "pw@ clean & rmdir /s/q .pyprojectx"
 
+[tool.pdm.scripts.start]
+cmd = "python -m chatroom_syncer"
+env_file = ".env"
+
 [tool.pdm.build]
 excludes = ["./**/.git"]
 package-dir = "src"
