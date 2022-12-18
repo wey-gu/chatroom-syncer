@@ -7,7 +7,7 @@ import importlib.util
 
 MODULES_TO_PATCH = [
     "wechaty_puppet_service.puppet",
-    "wechaty_grpc",
+    "wechaty_grpc.wechaty",
     "wechaty_grpc.wechaty.puppet",
 ]
 
