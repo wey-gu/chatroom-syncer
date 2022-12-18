@@ -1,6 +1,6 @@
 import pytest
 
-from chatroom_syncer.plugins.github_discussion_sink import GithubDiscussionSinkPlugin
+from chatroom_syncer.plugins.github_sink import GithubDiscussionSinkPlugin
 
 
 def test_GithubDiscussionSinkPlugin_init_sinks():
@@ -76,7 +76,7 @@ async def test_GithubDiscussionSinkPlugin_send_github_discussion_message():
 
 # export github_token=xxx
 # pip install pytest-asyncio
-# pytest tests/plugins/test_github_discussion_sink.py
+# pytest tests/plugins/test_github_sink.py
 
 # Note, this is kinda end to end test, so it will create a
 # discussion post and a comment in the discussion post
