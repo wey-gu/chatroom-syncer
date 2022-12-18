@@ -367,6 +367,19 @@ requires_python = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 summary = "Python Library for Tom's Obvious, Minimal Language"
 
 [[package]]
+name = "types-requests"
+version = "2.28.11.5"
+summary = "Typing stubs for requests"
+dependencies = [
+    "types-urllib3<1.27",
+]
+
+[[package]]
+name = "types-urllib3"
+version = "1.26.25.4"
+summary = "Typing stubs for urllib3"
+
+[[package]]
 name = "typing-extensions"
 version = "4.4.0"
 requires_python = ">=3.7"
@@ -492,7 +505,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.1"
-content_hash = "sha256:2a82e6405766496207e17b5790d5d4cfd210e913947a023106fa646dd7e80854"
+content_hash = "sha256:bce4c4445513b14ba1fbd1c0aaf33cdcbb00490744e88147d5a47cc92e1aa13a"
 
 [metadata.files]
 "aiofiles 22.1.0" = [
@@ -1169,6 +1182,14 @@ content_hash = "sha256:2a82e6405766496207e17b5790d5d4cfd210e913947a023106fa646dd
 "toml 0.10.2" = [
     {url = "https://files.pythonhosted.org/packages/44/6f/7120676b6d73228c96e17f1f794d8ab046fc910d781c8d151120c3f1569e/toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
     {url = "https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
+]
+"types-requests 2.28.11.5" = [
+    {url = "https://files.pythonhosted.org/packages/62/2c/8f1647d9dcc91e53129ade955824c1059292eea9d9e43b94fe090dd8a2ef/types-requests-2.28.11.5.tar.gz", hash = "sha256:a7df37cc6fb6187a84097da951f8e21d335448aa2501a6b0a39cbd1d7ca9ee2a"},
+    {url = "https://files.pythonhosted.org/packages/fd/17/61e0d7203f3133aecead2d8b75f89d7b3c6664560e70d9030e69eb3c0d87/types_requests-2.28.11.5-py3-none-any.whl", hash = "sha256:091d4a5a33c1b4f20d8b1b952aa8fa27a6e767c44c3cf65e56580df0b05fd8a9"},
+]
+"types-urllib3 1.26.25.4" = [
+    {url = "https://files.pythonhosted.org/packages/37/67/c0751b0f672b0822b11ece210b211bdd1e08d6e21aa62e6d297b054127d7/types-urllib3-1.26.25.4.tar.gz", hash = "sha256:eec5556428eec862b1ac578fb69aab3877995a99ffec9e5a12cf7fbd0cc9daee"},
+    {url = "https://files.pythonhosted.org/packages/ab/35/7b813668050bfe0820ad84df0ba668adb6abb41ca2bb0f16ad4deabca279/types_urllib3-1.26.25.4-py3-none-any.whl", hash = "sha256:ed6b9e8a8be488796f72306889a06a3fc3cb1aa99af02ab8afb50144d7317e49"},
 ]
 "typing-extensions 4.4.0" = [
     {url = "https://files.pythonhosted.org/packages/0b/8e/f1a0a5a76cfef77e1eb6004cb49e5f8d72634da638420b9ea492ce8305e8/typing_extensions-4.4.0-py3-none-any.whl", hash = "sha256:16fa4864408f655d35ec496218b85f79b3437c829e93320c7c9215ccfd92489e"},

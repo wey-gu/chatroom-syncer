@@ -1,18 +1,15 @@
 from __future__ import annotations
 
-from ..emoji import emoji_list
-
-from ..utils import format_msg_text, prepare_for_configuration
-
-from wechaty import WechatyPlugin, Message
-from wechaty_puppet import MessageType
-
 import hashlib
 import math
 
 from slack_sdk.errors import SlackApiError
 from slack_sdk.web.async_client import AsyncWebClient
+from wechaty import Message, WechatyPlugin
+from wechaty_puppet import MessageType
 
+from ..emoji import emoji_list
+from ..utils import format_msg_text, prepare_for_configuration
 
 HASH_BYTES = math.ceil(math.log(len(emoji_list), 2) / 8)
 
@@ -36,7 +33,8 @@ class SlackSinkPlugin(WechatyPlugin):
 
             if topic in self.group_to_channel:
                 if msg.type() == MessageType.MESSAGE_TYPE_TEXT:
-                    # TODO: need to introduce mechanism to avoid format again in second plugin
+                    # TODO: need to introduce mechanism to avoid format
+                    # again in second plugin
                     text = format_msg_text(msg.text())
                     if text:
                         msg.text()
