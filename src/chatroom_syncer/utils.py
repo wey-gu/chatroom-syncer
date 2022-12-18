@@ -1,27 +1,26 @@
 # Utils
 from __future__ import annotations
 
-import hashlib
-import math
+import datetime
 import os
 import re
 from typing import TypedDict
 
 import yaml
-from slack_sdk.errors import SlackApiError
-from slack_sdk.web.async_client import AsyncWebClient
-
-from .emoji import emoji_list
-
-HASH_BYTES = math.ceil(math.log(len(emoji_list), 2) / 8)
+from dotenv import load_dotenv
 
 
 class Config(TypedDict):
-    """Config"""
+    """Config, see config-example.yaml"""
 
+    # slack channel as target
+    enable_slack: bool
     group_channel_mapping: dict[str, str]
     slack_token: str
     enable_avatar: bool
+    # github discussion as target
+    enable_github_discussion: bool
+    group_discussion_mapping: dict[str, str]
 
 
 def format_msg_text(text: str) -> str:
@@ -49,7 +48,11 @@ def prepare_for_wechaty() -> None:
 
 def prepare_for_slack() -> str:
     """Prepare for slack"""
-    slack_token = os.environ.get("SLACK_BOT_TOKEN")
+    try:
+        slack_token = os.environ["SLACK_BOT_TOKEN"]
+    except KeyError:
+        load_dotenv()
+        slack_token = os.environ["SLACK_BOT_TOKEN"]
     if not slack_token:
         raise RuntimeError(
             "No slack token found in environment variable: SLACK_BOT_TOKEN"
@@ -57,52 +60,60 @@ def prepare_for_slack() -> str:
     return slack_token
 
 
+def prepare_for_github() -> str:
+    """Prepare for github"""
+    try:
+        github_token = os.environ.get("GITHUB_TOKEN")
+    except KeyError:
+        load_dotenv()
+        github_token = os.environ.get("GITHUB_TOKEN", None)
+
+    if not github_token:
+        raise RuntimeError(
+            "No github credential found in environment variable: "
+            "GITHUB_TOKEN"
+        )
+    return github_token
+
+
 def prepare_for_configuration() -> Config:
     """Prepare for room syncer"""
     prepare_for_wechaty()
-    slack_token = prepare_for_slack()
 
     config_file = os.environ.get("ROOM_SYNCER_CONFIG", "config.yaml")
 
     with open(config_file, "r") as f:
         config = yaml.safe_load(f)
 
+    # prepare for credentials of sync targets
+
+    if config["enable_slack"]:
+        config["slack_token"] = prepare_for_slack()
+    if config["enable_github_discussion"]:
+        config["github_token"] = prepare_for_github()
+
     validate_config(config)
-    config["slack_token"] = slack_token
+
     return config
 
 
 def validate_config(config: Config) -> None:
     """Validate config file"""
-    if not config.get("group_channel_mapping"):
-        raise ValueError("No group_channel_mapping found in config file")
+    if config["enable_slack"]:
+        if not config.get("group_channel_mapping"):
+            raise ValueError("No group_channel_mapping found in config file")
+    if config["enable_github_discussion"]:
+        if not config.get("group_github_discussion_mapping"):
+            raise ValueError(
+                "No group_github_discussion_mapping found in config file"
+            )
 
 
-def get_emoji(username: str) -> str:
-    """Get emoji"""
-    username_hash = hashlib.sha256(username.encode("utf-8")).digest()
-    # Get the first 2 bytes of the sha256 digest, that is max 65535
-    # then get the index by mod the length of emoji list
-    emoji_index = int.from_bytes(username_hash[:HASH_BYTES], "big")
-    return emoji_list[emoji_index % len(emoji_list)]
+def get_current_year() -> int:
+    """Get current year"""
+    return datetime.datetime.now().year
 
 
-async def send_slack_message(
-    text: str,
-    channel: str,
-    username: str,
-    slack_token: str,
-    icon_emoji: str | None = None,
-) -> None:
-    """Send message to Slack"""
-    client = AsyncWebClient(token=slack_token)
-    try:
-        response = await client.chat_postMessage(
-            channel=channel,
-            text=text,
-            username=username,
-            icon_emoji=icon_emoji,
-        )
-        print(response)
-    except SlackApiError as e:
-        print("Error sending message: {}".format(e))
+def get_week_number() -> int:
+    """Get week number"""
+    return datetime.datetime.now().isocalendar()[1]

@@ -1,0 +1,2 @@
+from .slack_sink import SlackSinkPlugin
+from .github_discussion_sink import GithubDiscussionSinkPlugin
