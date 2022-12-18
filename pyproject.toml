@@ -2,7 +2,7 @@
 
 [project]
 name = "chatroom-syncer"
-version = "0.1.4"
+version = "0.1.5"
 description = "Sync your IM group chat to Slack."
 authors = [
     {name = "Wey Gu", email = "weyl.gu@gmail.com"},
