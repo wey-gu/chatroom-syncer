@@ -13,9 +13,12 @@ Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC 
 
 > https://user-images.githubusercontent.com/1651790/207810877-b86943fa-24b3-479c-ac25-d602a6c5d53c.mp4
 
-<video controls autoplay>
-  <source src="https://user-images.githubusercontent.com/1651790/207810877-b86943fa-24b3-479c-ac25-d602a6c5d53c.mp4" type="video/mp4">
-</video>
+**Supported Sinks**
+- [x] Slack
+- [x] GitHub
+- [ ] IRC
+- [ ] Telegram
+- [ ] Discord
 
 ## Components and Flow
 
@@ -35,7 +38,7 @@ Thus, we need to start the WeChaty Gateway before the Chatroom Syncer.
 ┌────────────────────────────┐          ┌────────┐
 │                            │          │        │
 │ Chatroom Syncer            │          │        │
-│                            │          │        │
+│                            │          │ GitHub │
 │ WebChaty.onMessage()       ├──────────▶ Slack  │
 │                            │          │        │
 └──────────────▲─────────────┘          │        │
