@@ -19,12 +19,12 @@ jobs:
           pdm publish --username $PYPI_USERNAME --password $PYPI_PASSWORD
       - name: Ensure it could be installed from PyPI
         env:
-          # tag name, removed prefix "v", i.e. v0.1.5 --> 0.1.5
-          VERSION: ${{ github.event.release.tag_name | replace('v', '') }}
+          # tag name
+          tag_name: ${{ github.event.release.tag_name}}
         run: |
           # exponential backoff to ensure the version is available on PyPI
           for i in {1..8}; do
-            pip install chatroom-syncer==$VERSION && break
+            pip install chatroom-syncer==${tag_name#v} && break
             sleep $((2 ** i))
           done
       - name: Log into DockerHub
