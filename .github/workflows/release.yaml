@@ -32,12 +32,26 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            weygu/chatroom-syncer
+          tags: |
+            # git tag & latest coverred
+            type=ref,event=tag
+            # git branch
+            type=ref,event=branch
+            # 3.0.0
+            type=semver,pattern={{version}}
+            # 3
+            type=semver,pattern={{major}}
+            # 3.0
+            type=semver,pattern={{major}}.{{minor}}
       - name: Build and push Docker images
         uses: docker/build-push-action@v3
-        env:
-          # tag name, removed prefix "v"
-          VERSION: ${{ github.event.release.tag_name }}
         with:
-          platforms: linux/amd64
-          tags: weygu/chatroom-syncer:latest, weygu/chatroom-syncer:$VERSION
           push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
