@@ -111,9 +111,19 @@ docker run -d \
 Run Chatroom-Syncer:
 
 ```bash
+# install it
 python3 -m pip install chatroom-syncer
+# create config.yaml and change it
 cp config-example.yaml config.yaml
-export SLACK_TOKEN="xoxb-1234567890-1234567890-1234567890-1234567890"
+
+# put tokens for sink according to your config.yaml
+# i.e. if both slack and github discussion sinks were enabled
+# we need token to send message to slack and github discussion
+# as follow:
+export SLACK_BOT_TOKEN="xoxb-1234567890-1234567890-1234567890-1234567890"
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxx
+
+# run it
 python3 -m chatroom_syncer
 ```
 
