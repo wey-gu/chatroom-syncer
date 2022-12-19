@@ -19,6 +19,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           platforms: linux/amd64
-          tags: weygu/chatroom-syncer:latest
+          tags: weygu/chatroom-syncer:dev
           push: true
           file: Dockerfile.dev
