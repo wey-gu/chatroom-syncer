@@ -13,9 +13,12 @@ Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC 
 
 > https://user-images.githubusercontent.com/1651790/207810877-b86943fa-24b3-479c-ac25-d602a6c5d53c.mp4
 
-<video controls autoplay>
-  <source src="https://user-images.githubusercontent.com/1651790/207810877-b86943fa-24b3-479c-ac25-d602a6c5d53c.mp4" type="video/mp4">
-</video>
+**Supported Sinks**
+- [x] Slack
+- [x] GitHub
+- [ ] IRC
+- [ ] Telegram
+- [ ] Discord
 
 ## Components and Flow
 
@@ -35,7 +38,7 @@ Thus, we need to start the WeChaty Gateway before the Chatroom Syncer.
 ┌────────────────────────────┐          ┌────────┐
 │                            │          │        │
 │ Chatroom Syncer            │          │        │
-│                            │          │        │
+│                            │          │ GitHub │
 │ WebChaty.onMessage()       ├──────────▶ Slack  │
 │                            │          │        │
 └──────────────▲─────────────┘          │        │
@@ -111,9 +114,19 @@ docker run -d \
 Run Chatroom-Syncer:
 
 ```bash
+# install it
 python3 -m pip install chatroom-syncer
+# create config.yaml and change it
 cp config-example.yaml config.yaml
-export SLACK_TOKEN="xoxb-1234567890-1234567890-1234567890-1234567890"
+
+# put tokens for sink according to your config.yaml
+# i.e. if both slack and github discussion sinks were enabled
+# we need token to send message to slack and github discussion
+# as follow:
+export SLACK_BOT_TOKEN="xoxb-1234567890-1234567890-1234567890-1234567890"
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxx
+
+# run it
 python3 -m chatroom_syncer
 ```
 
