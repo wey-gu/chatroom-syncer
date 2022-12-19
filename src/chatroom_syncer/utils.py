@@ -7,7 +7,7 @@ import re
 from typing import TypedDict
 
 import yaml
-from dotenv import load_dotenv, find_dotenv
+from dotenv import find_dotenv, load_dotenv
 
 
 class Config(TypedDict):
