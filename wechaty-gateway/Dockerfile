@@ -27,7 +27,7 @@ ENV TIMEZONE=Asia/Shanghai \
 VOLUME [ "/wechaty_data" ]
 
 COPY --from=builder /app/node_modules /wechaty_data
-COPY package.json /wechaty_data
+COPY --from=builder /app/package.json /app/package-lock.json /wechaty_data/
 
 WORKDIR /wechaty_data
 

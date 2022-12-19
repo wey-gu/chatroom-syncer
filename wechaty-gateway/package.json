@@ -4,7 +4,7 @@
   "description": "Wechaty Gateway",
   "main": "index.js",
   "scripts": {
-    "start": "wechaty gateway"
+    "start": "npx wechaty gateway"
   },
   "author": "",
   "license": "ISC",
