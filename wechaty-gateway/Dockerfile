@@ -26,11 +26,11 @@ ENV TIMEZONE=Asia/Shanghai \
 
 VOLUME [ "/wechaty_data" ]
 
-COPY --from=builder /app/node_modules /wechaty_data
+COPY --from=builder /app/node_modules /wechaty_data/node_modules
 COPY --from=builder /app/package.json /app/package-lock.json /wechaty_data/
 
 WORKDIR /wechaty_data
 
 EXPOSE 9009/tcp
 
-CMD npm start --token $WECHATY_PUPPET_SERVICE_TOKEN --port $WECHATY_PUPPET_SERVER_PORT --puppet $WECHATY_PUPPET
+CMD npm start -- --token $WECHATY_PUPPET_SERVICE_TOKEN --port $WECHATY_PUPPET_SERVER_PORT --puppet $WECHATY_PUPPET
