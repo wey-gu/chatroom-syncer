@@ -7,7 +7,7 @@ import re
 from typing import TypedDict
 
 import yaml
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 
 class Config(TypedDict):
@@ -51,7 +51,7 @@ def prepare_for_slack() -> str:
     try:
         slack_token = os.environ["SLACK_BOT_TOKEN"]
     except KeyError:
-        load_dotenv()
+        load_dotenv(find_dotenv())
         slack_token = os.environ["SLACK_BOT_TOKEN"]
     if not slack_token:
         raise RuntimeError(
@@ -66,12 +66,11 @@ def prepare_for_github() -> str:
         github_token = os.environ.get("GITHUB_TOKEN")
     except KeyError:
         load_dotenv()
-        github_token = os.environ.get("GITHUB_TOKEN", None)
+        github_token = os.environ.get("GITHUB_TOKEN")
 
     if not github_token:
         raise RuntimeError(
-            "No github credential found in environment variable: "
-            "GITHUB_TOKEN"
+            "No github credential found in environment variable: GITHUB_TOKEN"
         )
     return github_token
 
