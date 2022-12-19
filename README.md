@@ -131,8 +131,11 @@ And fill in the following fields in the table:
 
 | Field | Description |
 | ----  | ----------- |
-| `group_channel_mapping` | A mapping from WeChat group name to Slack channel name |
-| `enable_avatar`         | Whether to enable generate random emoji based avatar   |
+| `enable_slack`                    | Switch of slack sink                                        |
+| `group_channel_mapping`           | Mapping WeChat group name to Slack channel name             |
+| `enable_avatar`                   | Switch to generate emoji-based avatar for Slack sink        |
+| `enable_github_discussion`        | Switch of Github Discussion sink                            |
+| `group_github_discussion_mapping` | Mapping WeChat group name to discussion:owner/repo/category |
 
 
 ## Contribute

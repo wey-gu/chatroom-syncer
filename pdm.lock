@@ -195,6 +195,11 @@ requires_python = ">=3.7"
 summary = "Safely pass data to untrusted environments and back."
 
 [[package]]
+name = "jieba"
+version = "0.42.1"
+summary = "Chinese Words Segmentation Utilities"
+
+[[package]]
 name = "jinja2"
 version = "3.1.2"
 requires_python = ">=3.7"
@@ -418,6 +423,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "wechaty-plugin-contrib"
+version = "0.0.19"
+summary = "Python Wechaty Plugin Contrib is a repo which store the pupular wechaty contrib"
+dependencies = [
+    "aiohttp",
+    "apscheduler",
+    "jieba",
+    "requests",
+    "sqlalchemy",
+    "wechaty>=0.5.dev1",
+]
+
+[[package]]
 name = "wechaty-puppet"
 version = "0.4.23"
 summary = "Abstract(Base) Class of Puppet Providers for Wechaty Framework"
@@ -474,7 +492,7 @@ summary = "Backport of pathlib-compatible object wrapper for zip files"
 
 [metadata]
 lock_version = "4.1"
-content_hash = "sha256:830e0a3531c509c1f6b78b459b4c404ef0259b097336487d90378506a688a50e"
+content_hash = "sha256:2a82e6405766496207e17b5790d5d4cfd210e913947a023106fa646dd7e80854"
 
 [metadata.files]
 "aiofiles 22.1.0" = [
@@ -803,6 +821,9 @@ content_hash = "sha256:830e0a3531c509c1f6b78b459b4c404ef0259b097336487d90378506a
 "itsdangerous 2.1.2" = [
     {url = "https://files.pythonhosted.org/packages/68/5f/447e04e828f47465eeab35b5d408b7ebaaaee207f48b7136c5a7267a30ae/itsdangerous-2.1.2-py3-none-any.whl", hash = "sha256:2c2349112351b88699d8d4b6b075022c0808887cb7ad10069318a8b0bc88db44"},
     {url = "https://files.pythonhosted.org/packages/7f/a1/d3fb83e7a61fa0c0d3d08ad0a94ddbeff3731c05212617dff3a94e097f08/itsdangerous-2.1.2.tar.gz", hash = "sha256:5dbbc68b317e5e42f327f9021763545dc3fc3bfe22e6deb96aaf1fc38874156a"},
+]
+"jieba 0.42.1" = [
+    {url = "https://files.pythonhosted.org/packages/c6/cb/18eeb235f833b726522d7ebed54f2278ce28ba9438e3135ab0278d9792a2/jieba-0.42.1.tar.gz", hash = "sha256:055ca12f62674fafed09427f176506079bc135638a14e23e25be909131928db2"},
 ]
 "jinja2 3.1.2" = [
     {url = "https://files.pythonhosted.org/packages/7a/ff/75c28576a1d900e87eb6335b063fab47a8ef3c8b4d88524c4bf78f670cce/Jinja2-3.1.2.tar.gz", hash = "sha256:31351a702a408a9e7595a8fc6150fc3f43bb6bf7e319770cbc0db9df9437e852"},
@@ -1172,6 +1193,10 @@ content_hash = "sha256:830e0a3531c509c1f6b78b459b4c404ef0259b097336487d90378506a
 "wechaty-grpc 0.20.19" = [
     {url = "https://files.pythonhosted.org/packages/08/7a/c41e73344bdd63b7d7decf5f3f99107c477987d29e8f5520f5c32df2d42b/wechaty_grpc-0.20.19-py3-none-any.whl", hash = "sha256:1b28d7647224a1f8ecee66b3d95a1af69fb2deebcc677d8b8d6ff310f5eab18c"},
     {url = "https://files.pythonhosted.org/packages/ac/a8/a2f8a4e8fa41f2acc9a6d746d62eb2f382f65942229984a5eaceb522ddab/wechaty-grpc-0.20.19.tar.gz", hash = "sha256:7a23ed51921b2ada126dca1a11d12b46367826a1844a96a774864f972cec87cf"},
+]
+"wechaty-plugin-contrib 0.0.19" = [
+    {url = "https://files.pythonhosted.org/packages/21/98/03eb46c73c608dad23aaf75a1aa99e4748495dd605460b7515431cde191f/wechaty-plugin-contrib-0.0.19.tar.gz", hash = "sha256:c4aaf96f4293149166494fa03f1622b76291ba1a59d95cdb0b5980cbe237748f"},
+    {url = "https://files.pythonhosted.org/packages/3a/ec/2332d27ec4b8f906440fc3f0356c47711f06d7274c66e6f3a48166adf4ab/wechaty_plugin_contrib-0.0.19-py3-none-any.whl", hash = "sha256:3ffa4d54a399072a03641b6dbcc3c50235839b40cca2ac872b9553d7666af263"},
 ]
 "wechaty-puppet 0.4.23" = [
     {url = "https://files.pythonhosted.org/packages/1c/1e/8dcddaff8c0364c5248a8234a0da1d79963c66fd477c6a1ee96878d32f48/wechaty_puppet-0.4.23-py3-none-any.whl", hash = "sha256:ce9f080fdaa549d532aa5e265817dfe8b4dbe0c56a39e6d4e3b50b1dad15230e"},

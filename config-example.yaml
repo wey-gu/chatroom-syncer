@@ -1,5 +1,14 @@
 ---
+# slack channel as target
+enable_slack: true
+# whether to enable slack msg with custom avatar
+enable_avatar: true
 group_channel_mapping:
   "NebulaGraph 讨论群 · Venus": "#wechat-sync-Venus"
-  "NebulaGraph 讨论群 · Earth": "#wechat-sync-Earth"
-enable_avatar: true
+  "bot-test": "#bot-test"
+
+# github discussion as target
+enable_github_discussion: true
+group_github_discussion_mapping:
+  "NebulaGraph 讨论群测试": "wey-gu/chatroom-syncer/WeChat Chat History"
+  "bot-test": "wey-gu/chatroom-syncer/WeChat Chat History"

@@ -2,7 +2,7 @@
 
 [project]
 name = "chatroom-syncer"
-version = "0.1.4"
+version = "0.1.5"
 description = "Sync your IM group chat to Slack."
 authors = [
     {name = "Wey Gu", email = "weyl.gu@gmail.com"},
@@ -13,6 +13,7 @@ dependencies = [
     "slack-sdk==3.19.5",
     "pyyaml==6.0",
     "aiohttp>=3.8.3",
+    "wechaty-plugin-contrib>=0.0.19",
 ]
 requires-python = ">=3.8"
 readme = "README.md"
