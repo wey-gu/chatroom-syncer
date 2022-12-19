@@ -22,10 +22,10 @@ Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC 
 
 ## Components and Flow
 
-| Component | Docker Images |
-| ----  | ----------- |
-| `wechaty-gateway` | [![Docker Image docker:wechaty-gateway](https://img.shields.io/docker/v/weygu/wechaty-gateway?label=Latest%20Tag)](https://hub.docker.com/r/weygu/wechaty-gateway) |
-| `chatroom-syncer` | [![Docker Image docker:chatroom-syncer](https://img.shields.io/docker/v/weygu/chatroom-syncer?label=Latest%20Tag)](https://hub.docker.com/r/weygu/chatroom-syncer) |
+| Components        | Docker Images       | Image Comments |
+| ----------------  | ------------------ | ------------- |
+| `wechaty-gateway` | [![Docker Image docker:wechaty-gateway](https://img.shields.io/docker/v/weygu/wechaty-gateway?label=Latest%20Tag)](https://hub.docker.com/r/weygu/wechaty-gateway) | |
+| `chatroom-syncer` | [![Docker Image docker:chatroom-syncer](https://img.shields.io/docker/v/weygu/chatroom-syncer?label=Latest%20Tag)](https://hub.docker.com/r/weygu/chatroom-syncer) | tag: `dev` is the main branch head, `latest` is the latest release |
 
 
 There are two processes in the system:
