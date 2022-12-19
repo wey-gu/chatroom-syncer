@@ -25,9 +25,8 @@ Chatroom-Syncer is a project to sync IM Chat Room to the public domain like IRC 
 | Components        | Docker Images       | Image Comments |
 | ----------------  | ------------------ | ------------- |
 | `wechaty-gateway` | [![Docker Image docker:wechaty-gateway](https://img.shields.io/docker/v/weygu/wechaty-gateway?label=Latest%20Tag)](https://hub.docker.com/r/weygu/wechaty-gateway) | `"wechaty": "1.20.2"` <br/> `"wechaty-puppet-wechat": "1.18.4"` |
-| `chatroom-syncer` | [![Docker Image docker:chatroom-syncer](https://img.shields.io/docker/v/weygu/chatroom-syncer?label=Latest%20Tag)](https://hub.docker.com/r/weygu/chatroom-syncer) | tag: `dev` is the main branch head, `latest` is the latest release |
-    "wechaty": "1.20.2",
-    "wechaty-puppet-wechat": "1.18.4"
+| `chatroom-syncer` | [![Docker Image docker:chatroom-syncer](https://img.shields.io/docker/v/weygu/chatroom-syncer?label=Latest%20Tag)](https://hub.docker.com/r/weygu/chatroom-syncer) | - tag: `dev` is the main branch head<br/> - `latest` is the latest release on [![PyPI](https://img.shields.io/pypi/v/chatroom-syncer.svg)](https://pypi.org/project/chatroom-syncer/) <br/> |
+
 
 There are two processes in the system:
 - Chatroom Syncer, current code base in Python as the WeChaty Client and the bot
