@@ -57,7 +57,9 @@ class GithubDiscussionSinkPlugin(WechatyPlugin):
         except ValueError:
             raise ValueError(
                 "group_github_discussion_mapping should be "
-                "in format of org/repo/category_name"
+                "in format of org/repo/category_name, or "
+                "the category_name is not found in the repo's "
+                "discussion categories"
             )
 
     def ensure_sink(self, org, repo, category) -> tuple[str, str]:

@@ -34,6 +34,7 @@ services:
       - WECHATY_PUPPET_SERVICE_ENDPOINT=${WECHATY_PUPPET_SERVICE_ENDPOINT:-wechaty-gateway:9009}
       - WECHATY_PUPPET_SERVICE_TOKEN=${WECHATY_PUPPET_SERVICE_TOKEN:-foobar2000}
       - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
     working_dir: /app
     command: ["python3", "-m", "chatroom_syncer"]
     volumes:
