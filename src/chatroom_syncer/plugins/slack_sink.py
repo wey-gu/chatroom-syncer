@@ -42,10 +42,16 @@ class SlackSinkPlugin(WechatyPlugin):
                         username = contact.name
                         if self._config["enable_avatar"]:
                             avatar_emoji = self.get_emoji(username)
+                            # note(wey): it's duplicated in Slack but essential
+                            # for linen see this issue for details:
+                            # https://github.com/Linen-dev/linen.dev/issues/761
+                            author_info = f"> {avatar_emoji} {username}:\n\n"
                         else:
                             avatar_emoji = None
+                            author_info = f"> {username}:\n\n"
+
                         await self.send_slack_message(
-                            text=text,
+                            text=f"{author_info}{text}",
                             channel=self.group_to_channel[topic],
                             username=username,
                             slack_token=self.slack_token,
