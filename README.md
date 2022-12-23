@@ -35,32 +35,37 @@ There are two processes in the system:
 Thus, we need to start the WeChaty Gateway before the Chatroom Syncer.
 
 ```asciiarm
-┌────────────────────────────┐          ┌────────┐
-│                            │          │        │
-│ Chatroom Syncer            │          │        │
-│                            │          │ GitHub │
-│ WebChaty.onMessage()       ├──────────▶ Slack  │
-│                            │          │        │
-└──────────────▲─────────────┘          │        │
-               │                        └────────┘
+┌────────────────────────────┐        ┌────────┐     ┌────────┐
+│                            │        │ Sink   │     │        │
+│ Chatroom Syncer            │        │        │     │        │
+│                            │        │ GitHub │     │        │
+│ onMessage()                ├────────▶ Slack ─ ─ ─ ─▶ Linen* │
+│   self.use(***SinkPlugin())│        │        │     │        │
+│                            │        │        │     │        │
+└──────────────▲─────────────┘        │        │     │        │
+               │                      └────────┘     └────────┘
              gRPC
                │
 ┌──────────────▼──────────────┐
 │                             │
 │  Wechaty Gateway            │
 │                             │
+│                             │
 │┌────────────────────────┐   │
 ││ Wechaty UOS puppet     │   │
 │└────────────────────────┘   │
 └─────────────────────────────┘
+
+# * Linen.dev is a Open Source project and a SaaS/Cloud service to help sync slack/discord to a searchable and shareable public domain.
+
 ```
 
 ## Run
 
 Before running, we need follow prerequisites:
 
-- Configure WeChat Group Names and Slack Channel Names in `config.yaml`, they should exist in both WeChat and Slack.
-- Configure Slack API Token in `.env`.
+- Configure WeChat Group Names and Sink Info in `config.yaml`, they should exist in both WeChat and Sink.
+- Configure Sink API token(Slack API Token, GitHub Token etc) in `.env`.
 
 ### Run with Docker
 
