@@ -15,6 +15,7 @@ dependencies = [
     "aiohttp>=3.8.3",
     "wechaty-plugin-contrib>=0.0.19",
     "python-dotenv>=0.21.0",
+    "betterproto>=2.0.0b1",
 ]
 requires-python = ">=3.8"
 readme = "README.md"
@@ -65,6 +66,9 @@ test = "pdm run pytest"
 [tool.pdm.scripts.start]
 cmd = "python -m chatroom_syncer"
 env_file = ".env"
+
+[tool.pdm.resolution.overrides]
+wechaty-grpc = "1.5.dev2"
 
 [tool.pdm.build]
 excludes = ["./**/.git"]

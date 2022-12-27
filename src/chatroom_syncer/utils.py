@@ -81,7 +81,7 @@ def prepare_for_configuration() -> Config:
 
     config_file = os.environ.get("ROOM_SYNCER_CONFIG", "config.yaml")
 
-    with open(config_file, "r") as f:
+    with open(config_file, "r", encoding="utf8") as f:
         config = yaml.safe_load(f)
 
     # prepare for credentials of sync targets

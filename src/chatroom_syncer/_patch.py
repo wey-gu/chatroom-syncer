@@ -3,28 +3,15 @@ A dirty HACK to fix the proto mismatching problem.
 It should be removed immediately after wechaty has released the version
 with new proto.
 """
-import importlib.util
-
-MODULES_TO_PATCH = [
-    "wechaty_puppet_service.puppet",
-    "wechaty_grpc.wechaty",
-    "wechaty_grpc.wechaty.puppet",
-]
-
-
-def _patch_one(module_name: str) -> None:
-    # Find the file path of the given module
-    spec = importlib.util.find_spec(module_name)
-    file_path = spec.origin
-    if not file_path:
-        return
-    with open(file_path, "rb") as f:
-        content = f.read()
-
-    with open(file_path, "wb") as f:
-        f.write(content.replace(b"filebox", b"file_box"))
+from wechaty_grpc.wechaty.puppet import MessagePayloadResponse
 
 
 def patch_all():
-    for module in MODULES_TO_PATCH:
-        _patch_one(module)
+    def _get_from_id(self):
+        return self.talker_id
+
+    def _get_to_id(self):
+        return self.listener_id
+
+    MessagePayloadResponse.from_id = property(_get_from_id)
+    MessagePayloadResponse.to_id = property(_get_to_id)
