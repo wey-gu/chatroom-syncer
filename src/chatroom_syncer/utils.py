@@ -7,7 +7,7 @@ import re
 from typing import TypedDict
 
 import yaml
-from dotenv import find_dotenv, load_dotenv
+from dotenv import load_dotenv
 
 
 class Config(TypedDict):
@@ -48,11 +48,8 @@ def prepare_for_wechaty() -> None:
 
 def prepare_for_slack() -> str:
     """Prepare for slack"""
-    try:
-        slack_token = os.environ["SLACK_BOT_TOKEN"]
-    except KeyError:
-        load_dotenv(find_dotenv())
-        slack_token = os.environ["SLACK_BOT_TOKEN"]
+    slack_token = os.environ.get("SLACK_BOT_TOKEN")
+
     if not slack_token:
         raise RuntimeError(
             "No slack token found in environment variable: SLACK_BOT_TOKEN"
@@ -62,11 +59,7 @@ def prepare_for_slack() -> str:
 
 def prepare_for_github() -> str:
     """Prepare for github"""
-    try:
-        github_token = os.environ.get("GITHUB_TOKEN")
-    except KeyError:
-        load_dotenv()
-        github_token = os.environ.get("GITHUB_TOKEN")
+    github_token = os.environ.get("GITHUB_TOKEN")
 
     if not github_token:
         raise RuntimeError(
@@ -77,11 +70,12 @@ def prepare_for_github() -> str:
 
 def prepare_for_configuration() -> Config:
     """Prepare for room syncer"""
+    load_dotenv()
     prepare_for_wechaty()
 
     config_file = os.environ.get("ROOM_SYNCER_CONFIG", "config.yaml")
 
-    with open(config_file, "r") as f:
+    with open(config_file, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
     # prepare for credentials of sync targets
